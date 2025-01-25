@@ -1,0 +1,5 @@
+setup.py
+diabetes_project.egg-info/PKG-INFO
+diabetes_project.egg-info/SOURCES.txt
+diabetes_project.egg-info/dependency_links.txt
+diabetes_project.egg-info/top_level.txt

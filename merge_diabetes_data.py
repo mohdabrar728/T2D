@@ -40,8 +40,13 @@ for file_name in sorted(os.listdir(directory)):
             for line in file:
                 # Split the line into fields
                 fields = line.strip().split('\t')
-                # Map the code field to its description
-                fields[2] = code_mapping.get(int(fields[2]), f"Unknown code: {fields[2]}")
+                try:
+                    # Attempt to map the code
+                    code_numeric = int(fields[2])  # Convert to integer
+                    fields[2] = code_mapping.get(code_numeric, f"Unknown code: {code_numeric}")
+                except ValueError:
+                    # Handle non-numeric codes
+                    fields[2] = f"Invalid code: {fields[2]}"
                 all_data.append(fields)
 
 # Convert the collected data into a Pandas DataFrame

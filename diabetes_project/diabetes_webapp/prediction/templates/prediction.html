@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Diabetes Prediction</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Form Section (Left) -->
+      <div class="form-section">
+        <h2>Diabetes Risk Prediction</h2>
+        <form method="post">
+          {% csrf_token %} {{ form.as_p }}
+          <button type="submit">Predict</button>
+        </form>
+      </div>
+
+      <!-- Result Section (Right) -->
+      {% if result %}
+      <div class="report-section">
+        <h3>Detailed Report</h3>
+        <table>
+          <tr>
+            <th>Parameter</th>
+            <th>Value</th>
+            <th>Evaluation</th>
+          </tr>
+          <tr>
+            <td>Glucose Level</td>
+            <td>{{ detailed_report.glucose_level.value }}</td>
+            <td class="{{ detailed_report.glucose_level.evaluation | lower }}">
+              {{ detailed_report.glucose_level.evaluation }}
+            </td>
+          </tr>
+          <tr>
+            <td>BMI</td>
+            <td>{{ detailed_report.bmi.value }}</td>
+            <td class="{{ detailed_report.bmi.evaluation | lower }}">
+              {{ detailed_report.bmi.evaluation }}
+            </td>
+          </tr>
+          <!-- <tr>
+            <td>Age</td>
+            <td>{{ detailed_report.age.value }}</td>
+            <td>{{ detailed_report.age.evaluation }}</td>
+          </tr>
+          <tr> -->
+            <td>Insulin Level</td>
+            <td>{{ detailed_report.insulin_level.value }}</td>
+            <td class="{{ detailed_report.insulin_level.evaluation | lower }}">
+              {{ detailed_report.insulin_level.evaluation }}
+            </td>
+          </tr>
+          <tr>
+            <td>Blood Pressure</td>
+            <td>{{ detailed_report.blood_pressure.value }}</td>
+            <td class="{{ detailed_report.blood_pressure.evaluation | lower }}">
+              {{ detailed_report.blood_pressure.evaluation }}
+            </td>
+          </tr>
+        </table>
+        <h4>
+          Overall Risk: <span class="{{ result | lower }}">{{ result }}</span>
+        </h4>
+        <!-- <h4>
+          Summary: {{ detailed_report.summary }}</span>
+        </h4> -->
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
